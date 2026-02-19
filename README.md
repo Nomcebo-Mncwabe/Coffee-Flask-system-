@@ -23,5 +23,6 @@ This project allows users to browse the menu, add items to a cart, and simulate 
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/YourUsername/coffee-shop-system.git
+git clone https://github.com/Nomcebo-Mncwabe/coffee-shop-system.git
 cd coffee-shop-system
+
