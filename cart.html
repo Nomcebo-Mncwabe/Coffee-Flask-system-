@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart | Cozy Coffee</title>
+    <!-- CART CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="nav-left">
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/cart">Cart</a>
+        <a href="/contact">Contact Us</a>
+    </div>
+
+    <div class="nav-right">
+        {% if session.get('user') %}
+            <span class="user-greeting">Hello, {{ session['user'] }}!</span>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {% endif %}
+    </div>
+</nav>
+
+ <section class="cart">
+    <h2>Your Cart</h2>
+
+    <form method="GET" action="{{url_for('checkout') }}">
+        <div class="cart-grid">
+        <!-- Cart item example -->
+            <div class="cart-card" data-price="25">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="1">
+                <img src="{{ url_for('static', filename='images/espresso.jpg') }}" alt="Espresso">
+                <div class="item-details">
+                    <h3>Espresso</h3>
+                    <p>R25</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_1" value="1" min="1">
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card" data-price="35">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="2">
+                <img src="{{ url_for('static', filename='images/latte.jpg') }}" alt="Latte">
+                <div class="item-details">
+                    <h3>Latte</h3>
+                    <p>R35</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_2" value="1" min="1">
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card" data-price="32">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="3">
+                <img src="{{ url_for('static', filename='images/cappuccino.jpg') }}" alt="Cappucino">
+                <div class="item-details">
+                    <h3>Cappucino</h3>
+                    <p>R32</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_3" value="1" min="1">
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card" data-price="38">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="4">
+                <img src="{{ url_for('static', filename='images/iced_latte.jpg') }}" alt="Iced_latte">
+                <div class="item-details">
+                    <h3>Iced Latte</h3>
+                    <p>R38</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_4" value="1" min="1">
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card" data-price="40">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="5">
+                <img src="{{ url_for('static', filename='images/mocha.jpg') }}" alt="Mocha">
+                <div class="item-details">
+                    <h3>Mocha</h3>
+                    <p>R40</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_5" value="1" min="1">
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card" data-price="45">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="6">
+                <img src="{{ url_for('static', filename='images/chocolate_cake.jpg') }}" alt="Chocolate_cake">
+                <div class="item-details">
+                    <h3>Chocolate Cake</h3>
+                    <p>R45</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_6" value="1" min="1">
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card" data-price="40">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="7">
+                <img src="{{ url_for('static', filename='images/vanilla_cake.jpg') }}" alt="Vanilla_cake">
+                <div class="item-details">
+                    <h3>Vanilla Cake</h3>
+                    <p>R40</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_7" value="1" min="1">
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card" data-price="50">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="8">
+                <img src="{{ url_for('static', filename='images/red_velvet.jpg') }}" alt="Red_velvet">
+                <div class="item-details">
+                    <h3>Red Velvet</h3>
+                    <p>R50</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_8" value="1" min="1">
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card" data-price="20">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="9">
+                <img src="{{ url_for('static', filename='images/cupcake.jpg') }}" alt="Cupcake">
+                <div class="item-details">
+                    <h3>Cupcake</h3>
+                    <p>R20</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_9" value="1" min="1">
+                        <button type="button" class="plus">+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-card" data-price="48">
+                <input type="checkbox" class="item-checkbox" name="selected_items" value="10">
+                <img src="{{ url_for('static', filename='images/cheesecake.jpg') }}" alt="Cheesecake">
+                <div class="item-details">
+                    <h3>Cheesecake</h3>
+                    <p>R48</p>
+                    <div class="quantity-controls">
+                        <button type="button" class="minus">-</button>
+                        <input type="number" class="quantity" name="quantity_10" value="1" min="1">
+                        <button type="button" class="plus" >+</button>
+                    </div>
+                </div>
+            </div>
+        <!-- Repeat for other items -->
+        </div>
+
+    <!-- Delivery / Collection -->
+        <div class="delivery-options">
+            <label><input type="radio" name="delivery_option" value="collection"> Collection (Free)</label>
+            <label><input type="radio" name="delivery_option" value="delivery"> Delivery (R20)</label>
+        </div>
+
+     <!-- TOTAL -->
+        <div class="cart-summary">
+            <h3>Total: <span id="total">R0</span></h3>
+            <button type="submit" class="btn checkout-btn">Checkout</button>
+        </div>
+    </form>
+ </section>
+
+<!-- IMPORTANT: JS MUST LOAD AFTER CONTENT -->
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+</body>
+

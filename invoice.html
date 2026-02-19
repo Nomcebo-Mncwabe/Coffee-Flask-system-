@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice | Cozy Coffee</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="invoice">
+
+  <div class="invoice-container">
+    <h2>Thank you for your order!</h2>
+
+<table>
+    <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Subtotal</th>
+    </tr>
+
+    {% for item in order.cart %}
+    <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>R{{ item.price }}</td>
+        <td>R{{ item.subtotal }}</td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+        <td colspan="3">Delivery Fee</td>
+        <td>R{{ order.delivery_fee }}</td>
+    </tr>
+
+    <tr>
+        <td colspan="3"><strong>Total</strong></td>
+        <td><strong>R{{ order.total_price }}</strong></td>
+    </tr>
+</table>
+
+
+{% if order.delivery_option == "delivery" %}
+<p><strong>Delivery Address:</strong> {{ order.address }}</p>
+{% else %}
+<p><strong>Pickup:</strong> Collection</p>
+{% endif %}
+
+<a href="{{ url_for('finish_order') }}" class="btn">Back to Menu</a>
+
+  </div>
+
+</body>
+</html>
+

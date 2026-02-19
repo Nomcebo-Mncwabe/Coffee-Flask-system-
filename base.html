@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Cozy Coffee Shop</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/menu">Menu</a>
+    <a href="/cart">Cart</a>
+    <a href="/contact">Contact Us</a>
+
+</nav>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>
+

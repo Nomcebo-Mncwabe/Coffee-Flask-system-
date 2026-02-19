@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout | Cozy Coffee</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="nav-left">
+        <a href="/">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/cart">Cart</a>
+        <a href="/contact">Contact Us</a>
+    </div>
+    <div class="nav-right">
+        {% if session.get('user') %}
+            <span class="user-greeting">Hello, {{ session['user'] }}!</span>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        {% endif %}
+    </div>
+</nav>
+
+<section class="checkout">
+    <h2>Order Summary</h2>
+
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+        </tr>
+
+        {% for item in order.cart %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>R{{ item.price }}</td>
+            <td>R{{ item.subtotal }}</td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="3">Delivery Fee</td>
+            <td>R{{ order.delivery_fee }}</td>
+        </tr>
+
+        <tr>
+            <td colspan="3"><strong>Total</strong></td>
+            <td><strong>R{{ order.total_price }}</strong></td>
+        </tr>
+    </table>
+
+    <!-- Delivery / Collection Form -->
+    <h3>Delivery Options</h3>
+    <form method="POST" action="{{ url_for('checkout') }}">
+        <label>
+            <input type="radio" name="delivery_option" value="collection"
+            {% if order.delivery_option =="collection" %}checked{% endif %}>
+            Collection (Free)
+        </label>
+        <label>
+            <input type="radio" name="delivery_option" value="delivery"
+            {% if order.delivery_option =="delivery" %}checked{% endif %}>
+            Delivery (R20)
+        </label>
+
+        <div id="delivery_address" style="margin-top:10px; {% if order.delivery_option != 'delivery' %}display:none;{% endif %}">
+            <label>Delivery Address:</label>
+            <input type="text" name="address" placeholder="Enter delivery address"
+                value="{{ order.address or '' }}">
+        </div>
+
+        <button type="submit" class="btn">Continue to Payment</button>
+    </form>
+</section>
+
+<script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
+
+</body>
+</html>
+
+
+
+
+
